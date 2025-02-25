@@ -74,6 +74,7 @@ public class ClienteRepoImpl {
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, "");
              PreparedStatement pstmt = connection.prepareStatement(insertQuery)) {
             cliente.setId(getNextId());
+
             pstmt.setInt(1, cliente.getId());
             pstmt.setString(2, cliente.getNombre());
             pstmt.setString(3, cliente.getApellido());

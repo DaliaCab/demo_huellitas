@@ -25,7 +25,7 @@ public class Empleado {
     private String apellido;
 
     @Column(name = "telefono")
-    private Integer telefono;
+    private String telefono;
 
     @Column(name = "cargo", nullable = false, length = 10)
     private String cargo;
@@ -42,7 +42,7 @@ public class Empleado {
     @Column(name = "especialidad", length = 30)
     private String especialidad;
 
-    @Column(name = "`contraseña`", nullable = false, length = 30)
-    private String contraseña;
+    @Column(name = "contrasena", nullable = false, length = 30)
+    private String contrasena;
 
 }

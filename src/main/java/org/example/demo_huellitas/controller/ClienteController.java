@@ -6,8 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import java.util.Map;
 
 import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+@CrossOrigin(origins = "http://localhost:3000") // Permite solicitudes desde React (que corre en localhost:3000)
 
 
 //@RequestMapping("/clientes")
@@ -50,4 +57,35 @@ public class ClienteController {
     public void deleteCliente(@PathVariable Integer id) {
         clienteService.deleteCliente(id);
     }
+
+    @PostMapping("/login")
+    @ResponseBody
+    public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
+        try {
+            Integer id = Integer.parseInt(credentials.get("id"));
+            String contrasena = credentials.get("contrasena");
+
+            Cliente empleado = clienteService.getClienteById(id);
+
+            if (empleado != null && empleado.getContrasena().equals(contrasena)) {
+                return ResponseEntity.ok().body(Map.of(
+                        "mensaje", "Login exitoso",
+                        "id", empleado.getId(),
+                        "nombre", empleado.getNombre()
+                ));
+
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of(
+                        "mensaje", "Credenciales incorrectas"
+                ));
+            }
+        } catch (NumberFormatException e) {
+            return ResponseEntity.badRequest().body("ID inválido");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
+                    "mensaje", "Error interno del servidor"
+            ));
+        }
+    }
 }
+

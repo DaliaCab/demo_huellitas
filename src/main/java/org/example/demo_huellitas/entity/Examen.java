@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "examen")
-public class Examan {
+public class Examen {
     @Id
     @Column(name = "IDExamen", nullable = false)
     private Integer id;
