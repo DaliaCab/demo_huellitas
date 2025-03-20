@@ -47,6 +47,7 @@ public class EmpleadoRepoImpl {
         return empleados;
     }
 
+    //Metodo para buscar por id
     public Optional<Empleado> findById(Integer id) {
         String query = "SELECT * FROM empleado Where IDEmpleado = ?";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, "");
@@ -73,6 +74,7 @@ public class EmpleadoRepoImpl {
         return Optional.empty();
     }
 
+    //Metodo para agregar un nuevo empleado
     public Empleado add(Empleado empleado) {
         String query = "INSERT INTO empleado (IDEmpleado, nombre, apellido, telefono, cargo, numTarjetaProfesional, correo, fechaNacimiento, especialidad, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, "");
@@ -90,12 +92,14 @@ public class EmpleadoRepoImpl {
             pstmt.setString(9, empleado.getEspecialidad());
             pstmt.setString(10, empleado.getContrasena());
             pstmt.executeUpdate();
+            return empleado;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    //Metodo para actualizar un empleado
     public Empleado update(Integer id, Empleado empleado) {
         Empleado empleadoold = findById(id).get();
         if (empleado.getNombre() == null) {
@@ -148,6 +152,8 @@ public class EmpleadoRepoImpl {
         return empleado;
     }
 
+
+    //Metodo para eliminar un empleado por id
     public void deleteById(Integer id) {
         String query = "DELETE FROM empleado WHERE IDEmpleado = ?";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, "");
@@ -160,12 +166,12 @@ public class EmpleadoRepoImpl {
     }
 
     private int getNextId() {
-        String query = "SELECT MAX(IDEmpleado) FROM empleado";
+        String query = "SELECT MAX(IDEmpleado) as id FROM empleado";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, "");
              Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             if (rs.next()) {
-                return rs.getInt("max_id") + 1;
+                return rs.getInt("id") + 1;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -173,7 +179,7 @@ public class EmpleadoRepoImpl {
         return 0;
     }
 
-    public void save(Empleado empleado) {
+    public void updatePassword(Empleado empleado) {
         String sql = "UPDATE empleado SET contrasena = ? WHERE IDEmpleado = ?";
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, "");
              PreparedStatement pstmt = connection.prepareStatement(sql)) {

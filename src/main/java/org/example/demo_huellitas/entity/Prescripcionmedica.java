@@ -10,15 +10,15 @@ import lombok.Setter;
 @Table(name = "prescripcionmedica")
 public class Prescripcionmedica {
     @Id
-    @Column(name = "IDprescripcionMedica", nullable = false)
+    @Column(name = "idprescripcionmedica", nullable = false)
     private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "IDEmpleado", nullable = false)
+    @JoinColumn(name = "idempleado", nullable = false)
     private Empleado iDEmpleado;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "IDPaciente", nullable = false)
+    @JoinColumn(name = "idpaciente", nullable = false)
     private Paciente iDPaciente;
 
     @Column(name = "notas", nullable = false, length = 50)

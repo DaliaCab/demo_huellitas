@@ -12,18 +12,18 @@ import java.time.LocalDate;
 @Table(name = "examen")
 public class Examen {
     @Id
-    @Column(name = "IDExamen", nullable = false)
+    @Column(name = "idexamen", nullable = false)
     private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "IDPaciente", nullable = false)
+    @JoinColumn(name = "idpaciente", nullable = false)
     private Paciente iDPaciente;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "IDEmpleado", nullable = false)
+    @JoinColumn(name = "idempleado", nullable = false)
     private Empleado iDEmpleado;
 
-    @Column(name = "tipoExamen", nullable = false, length = 30)
+    @Column(name = "tipoexamen", nullable = false, length = 30)
     private String tipoExamen;
 
     @Column(name = "cantidad")
@@ -32,10 +32,10 @@ public class Examen {
     @Column(name = "resultados", length = 30)
     private String resultados;
 
-    @Column(name = "fechaExamen")
+    @Column(name = "fechaexamen")
     private LocalDate fechaExamen;
 
-    @Column(name = "detalleExamen", length = 50)
+    @Column(name = "detalleexamen", length = 50)
     private String detalleExamen;
 
 }

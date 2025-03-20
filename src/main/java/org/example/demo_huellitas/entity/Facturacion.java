@@ -12,18 +12,18 @@ import java.time.LocalDate;
 @Table(name = "facturacion")
 public class Facturacion {
     @Id
-    @Column(name = "numFactura", nullable = false)
+    @Column(name = "numfactura", nullable = false)
     private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "IDCliente", nullable = false)
+    @JoinColumn(name = "idcliente", nullable = false)
     private Cliente iDCliente;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "IDEmpleado", nullable = false)
+    @JoinColumn(name = "idempleado", nullable = false)
     private Empleado iDEmpleado;
 
-    @Column(name = "totalFactura", nullable = false)
+    @Column(name = "totalfactura", nullable = false)
     private Float totalFactura;
 
     @Column(name = "cantidad", nullable = false)
@@ -32,10 +32,10 @@ public class Facturacion {
     @Column(name = "impuestos", nullable = false)
     private Float impuestos;
 
-    @Column(name = "fechaFactura", nullable = false)
+    @Column(name = "fechafactura", nullable = false)
     private LocalDate fechaFactura;
 
-    @Column(name = "metodoPago", nullable = false, length = 30)
+    @Column(name = "metodopago", nullable = false, length = 30)
     private String metodoPago;
 
 }

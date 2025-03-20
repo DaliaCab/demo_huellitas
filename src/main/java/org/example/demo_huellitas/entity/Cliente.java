@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Table(name = "cliente")
 public class Cliente {
     @Id
-    @Column(name = "IDCliente", nullable = false)
+    @Column(name = "idcliente", nullable = false)
     private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 30)
@@ -28,7 +28,7 @@ public class Cliente {
     @Column(name = "contrasena", nullable = false, length = 30)
     private String contrasena;
 
-    @Column(name = "fechaNacimiento")
+    @Column(name = "fechanacimiento")
     private LocalDate fechaNacimiento;
 
     @Column(name = "correo", nullable = false, length = 30)
@@ -37,7 +37,7 @@ public class Cliente {
     @Column(name = "telefono", nullable = false)
     private String telefono;
 
-    @Column(name = "fechaAfiliacion")
+    @Column(name = "fechaafiliacion")
     private LocalDate fechaAfiliacion;
 
 }

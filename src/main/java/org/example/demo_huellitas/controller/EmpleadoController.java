@@ -12,12 +12,9 @@ import java.util.Map;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.List;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin(origins = "http://localhost:3000") // Permite solicitudes desde React (que corre en localhost:3000)
-
-
 //@RequestMapping("/empleados")
 @Controller
 public class EmpleadoController {

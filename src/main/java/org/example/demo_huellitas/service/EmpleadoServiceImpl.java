@@ -27,7 +27,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         String hashedPassword = BCrypt.hashpw(nuevaContrasena, BCrypt.gensalt());
         empleado.setContrasena(hashedPassword);
 
-        empleadoRepository.save(empleado);
+        empleadoRepository.updatePassword(empleado);
     }
 
     @Override
@@ -45,6 +45,11 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public Empleado updateEmpleado(Integer id, Empleado empleado) {
+        if(empleado.getContrasena() != null) {
+            // Hashear la contraseña antes de guardar
+            String hashedPassword = BCrypt.hashpw(empleado.getContrasena(), BCrypt.gensalt());
+            empleado.setContrasena(hashedPassword);
+        }
         return empleadoRepository.update(id, empleado);
     }
 
